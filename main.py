@@ -2,11 +2,11 @@
 # the open-source pygame library
 # throughout this file
 import pygame
-from constants import *
-from player import *
+from constants import *  # Keep constants first
+from circleshape import *  # Add this if you need it
 from asteroid import *
 from asteroidfield import *
-
+from player import *  # Move player to the end
 
 
 
@@ -18,11 +18,14 @@ def main():
 	updatable = pygame.sprite.Group()
 	drawable = pygame.sprite.Group()
 	asteroids = pygame.sprite.Group()
+	shots_group = pygame.sprite.Group()
 	Player.containers = (updatable, drawable)
 	Asteroid.containers = (asteroids, updatable, drawable)
 	AsteroidField.containers = (updatable)
+	Shot.containers = (updatable, drawable, shots_group)
 
 	dt = 0
+	
 	
 	print ("Starting asteroids!")
 	print (f"Screen width: {SCREEN_WIDTH}")
@@ -30,7 +33,7 @@ def main():
 
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-	player = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
+	player = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2), shots_group)
 	asteroid_field = AsteroidField()
 
 	
@@ -44,6 +47,7 @@ def main():
 		
 		for obj in updatable:
 			obj.update(dt)
+			
 
 		for obj in asteroids:
 			if obj.collision(player) == True:

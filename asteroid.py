@@ -17,4 +17,3 @@ class Asteroid(CircleShape):
         #something here about self.position and self.velocity
         self.position += self.velocity * dt
 
-        

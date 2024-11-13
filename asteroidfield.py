@@ -50,3 +50,5 @@ class AsteroidField(pygame.sprite.Sprite):
             kind = random.randint(1, ASTEROID_KINDS)
             self.spawn(ASTEROID_MIN_RADIUS * kind, position, velocity)
             
+
+            
