@@ -25,6 +25,7 @@ def main():
 	Shot.containers = (updatable, drawable, shots_group)
 
 	dt = 0
+	score = 0
 	
 	
 	print ("Starting asteroids!")
@@ -52,8 +53,16 @@ def main():
 		for obj in asteroids:
 			if obj.collision(player) == True:
 				print ("Game over!")
+				print (f"Score: {score}")
 				event.type == pygame.QUIT
 				return
+			
+		for obj in asteroids:
+			for shots in shots_group:
+				if obj.collision(shots) == True:
+					obj.split()
+					shots.kill()
+					score += 1
 
 
 		screen.fill((0, 0, 0))
